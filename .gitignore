@@ -1,0 +1,16 @@
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+# Swap and undo files
+*.swp
+*.swo
+*.un~
+
+# Neovim cache/state (if created locally)
+.netrwhist
+*.log
