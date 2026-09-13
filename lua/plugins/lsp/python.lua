@@ -4,7 +4,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "python", "toml" } },
   },
-  -- Pyright with enhanced analysis settings
+  -- Pyright — completions, go-to-def, and imports stay fully functional;
+  -- type-checking diagnostics are quieted down.
   -- (server is also in masion.lua ensure_installed — both merge fine)
   {
     "neovim/nvim-lspconfig",
@@ -14,9 +15,23 @@ return {
           settings = {
             python = {
               analysis = {
-                typeCheckingMode = "basic",
+                -- "off" disables type-checking warnings while keeping
+                -- completions, go-to-definition, hover, and auto-imports.
+                -- Switch to "basic" or "standard" when you want stricter checks.
+                typeCheckingMode = "off",
                 autoImportCompletions = true,
                 diagnosticMode = "openFilesOnly",
+                -- Suppress the noisiest individual diagnostics
+                diagnosticSeverityOverrides = {
+                  reportMissingImports = "none",
+                  reportMissingModuleSource = "none",
+                  reportMissingTypeStubs = "none",
+                  reportOptionalMemberAccess = "none",
+                  reportUnusedImport = "warning",
+                  reportUnusedVariable = "warning",
+                  reportGeneralTypeIssues = "none",
+                  reportPrivateImportUsage = "none",
+                },
               },
             },
           },
@@ -33,13 +48,14 @@ return {
       },
     },
   },
-  -- Linting (pylint installed via masion.lua)
-  {
-    "mfussenegger/nvim-lint",
-    opts = {
-      linters_by_ft = {
-        python = { "pylint" },
-      },
-    },
-  },
+  -- Pylint disabled — it stacks verbose convention/refactor warnings on top
+  -- of pyright. Uncomment below to re-enable it.
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   opts = {
+  --     linters_by_ft = {
+  --       python = { "pylint" },
+  --     },
+  --   },
+  -- },
 }
