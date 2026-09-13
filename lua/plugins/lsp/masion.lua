@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = {
       -- list of servers for mason to install
       ensure_installed = {
@@ -19,7 +19,7 @@ return {
     },
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
           ui = {
             icons = {
@@ -46,7 +46,7 @@ return {
       },
     },
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
     },
   },
 }
