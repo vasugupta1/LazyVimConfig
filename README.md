@@ -62,6 +62,86 @@ Mason auto-installs: `gopls`, `pyright`, `omnisharp`, `debugpy`, `delve`, `netco
 
 > `<leader>` is **Space** by default in LazyVim.
 
+### Searching
+
+#### Find Files by Name (`<leader>ff`)
+
+Opens Telescope fuzzy file finder. Type part of the filename to narrow results.
+
+| Trick | Example | What it does |
+|---|---|---|
+| Fuzzy match | `mainpy` | Matches `main.py`, `main_app.py`, etc. |
+| Path segments | `src main` | Files with `main` inside a `src` directory |
+| Exact match | `'main.py` | Prefix with `'` for exact substring match |
+| Extension filter | `.go` | Shows only `.go` files |
+
+**Inside the Telescope picker:**
+
+| Key | Action |
+|---|---|
+| `Ctrl-j` / `Ctrl-k` | Move down / up in results |
+| `Ctrl-n` / `Ctrl-p` | Move down / up in results (alternative) |
+| `Enter` | Open selected file |
+| `Ctrl-x` | Open in horizontal split |
+| `Ctrl-v` | Open in vertical split |
+| `Ctrl-t` | Open in new tab |
+| `Esc` | Close picker (normal mode) |
+| `Ctrl-c` | Close picker (insert mode) |
+
+#### Search Text Across Project (`<leader>fg`)
+
+Opens **live grep** — searches file contents in real time as you type.
+
+| Trick | Example | What it does |
+|---|---|---|
+| Simple search | `func main` | Finds all occurrences of "func main" |
+| Filter by glob | `func main  --  *.go` | Search only in `.go` files (type `  --  ` then the glob) |
+| Regex | `func \w+Handler` | Use regex patterns for complex matches |
+
+> **Tip:** After searching, press `Ctrl-q` to send all results to the **quickfix list**, then navigate with `]q` / `[q`.
+
+#### Search Current Word
+
+| Key | Action |
+|---|---|
+| `<leader>sw` | **Search word** under cursor across project |
+| `<leader>sW` | **Search WORD** under cursor (includes special chars) |
+| `*` | Search word under cursor in current file (forward) |
+| `#` | Search word under cursor in current file (backward) |
+
+#### Search by Symbol
+
+| Key | Action |
+|---|---|
+| `<leader>ss` | **Search symbols** in current buffer (functions, classes, etc.) |
+| `<leader>sS` | **Search symbols** across the whole workspace |
+
+#### Search in Neo-tree (`<leader>e`)
+
+While the file tree is focused:
+
+| Key | Action |
+|---|---|
+| `/` | **Filter** files by name (fuzzy) |
+| `f` | **Filter** files by name |
+| `H` | Toggle **hidden files** (dotfiles) |
+| `Ctrl-c` | Clear filter |
+
+#### Other Search Commands
+
+| Key | Action |
+|---|---|
+| `<leader>s"` | Search **registers** |
+| `<leader>sa` | **Auto commands** |
+| `<leader>sc` | **Command history** |
+| `<leader>sC` | **Available commands** |
+| `<leader>sd` | **Diagnostics** (current buffer) |
+| `<leader>sD` | **Diagnostics** (all buffers) |
+| `<leader>sh` | **Help tags** |
+| `<leader>sk` | **Keymaps** (search what any key does) |
+| `<leader>sm` | **Marks** |
+| `<leader>sR` | **Resume** last search |
+
 ### Moving Around a File
 
 | Key | Action |
@@ -87,6 +167,16 @@ Mason auto-installs: `gopls`, `pyright`, `omnisharp`, `debugpy`, `delve`, `netco
 | `K` | **Hover documentation** (press K on any symbol) |
 | `Ctrl-o` | **Jump back** (after go-to-definition) |
 | `Ctrl-i` | **Jump forward** |
+
+#### Exploring Functions & Docs (e.g. Go)
+
+1. Place your cursor on any function name (e.g. `http.ListenAndServe`)
+2. Press **`K`** — a floating window shows the function signature + doc comment
+3. Press **`K`** again to **enter** the floating window (scroll with `j`/`k`, close with `q`)
+4. Want to see the source? Press **`gd`** instead — jumps straight to the definition
+5. Press **`Ctrl-o`** to jump back to where you were
+
+> **Tip:** `K` works on any symbol — functions, types, struct fields, packages, variables. In Go it pulls from `gopls` so you get the same docs as `go doc`. In Python it shows the docstring from `pyright`.
 
 ### Window Management
 

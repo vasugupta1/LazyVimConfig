@@ -60,6 +60,7 @@ return {
         "goimports",
         "gomodifytags",
         "impl",
+        "golangci-lint",
       })
     end,
   },
@@ -69,6 +70,15 @@ return {
     opts = {
       formatters_by_ft = {
         go = { "goimports", "gofumpt" },
+      },
+    },
+  },
+  -- Linting: golangci-lint (bundles staticcheck, govet, errcheck, and more)
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        go = { "golangcilint" },
       },
     },
   },
